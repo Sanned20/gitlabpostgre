@@ -21,12 +21,12 @@ services:
    restart: unless-stopped
    environment:
     GITLAB_OMNIBUS_CONFIG: |
-      gitlab_rails['gitlab_shell_ssh_port'] = 50022
-      external_url 'https://127.0.0.1:443'
+      gitlab_rails['gitlab_shell_ssh_port'] = 8822
+      
    ports:
     - "443:443"
     - "80:80"
-    - "50022:22"
+    - "8822:22"
    volumes:
     - /data/docker/gitlab/etc/gitlab:/etc/gitlab
     - /data/docker/gitlab/var/opt/gitlab:/var/opt/gitlab
@@ -46,5 +46,5 @@ services:
       - gitlab_net
 networks:
   gitlab_net:
-  gitdb: {}
+  gitdb:
        
