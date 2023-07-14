@@ -25,8 +25,8 @@ services:
       external_url 'http://gitlab.localhost'
       
    ports:
-    - "8443:443"
-    - "8080:80"
+    - "443:443"
+    - "80:80"
     
    volumes:
     - $GITLAB_HOME/config:/etc/gitlab
@@ -47,6 +47,5 @@ services:
       - gitlab
 networks:
   gitlab:
-    name: gitlab-netowrk
   gitdb:
        
