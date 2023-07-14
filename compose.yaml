@@ -17,7 +17,7 @@ services:
   gitlab:
    container_name: gitlab
    image: gitlab/gitlab-ce:latest
-   restart: never
+   
    hostname: 127.0.0.1
    environment:
       GITLAB_SKIP_UNMIGRATED_DATA_CHECK: 'true'
