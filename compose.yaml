@@ -10,7 +10,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD: 12345
+        POSTGRES_PASSWORD: 12345
         PGDATA: /var/lib/postresql/data/pgdata
     
 
@@ -20,8 +20,8 @@ services:
    restart: never
    hostname: 127.0.0.1
    environment:
-    - GITLAB_SKIP_UNMIGRATED_DATA_CHECK=true
-    - GITLAB_OMNIBUS_CONFIG: |
+      GITLAB_SKIP_UNMIGRATED_DATA_CHECK: 'true'
+      GITLAB_OMNIBUS_CONFIG: |
        external_url 'https://127.0.0.1'
        # Add any other gitlab.rb configuration here, each on its own line
    ports:
