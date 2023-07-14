@@ -1,5 +1,5 @@
 services:
-  postgresql:
+  postgre:
     container_name: postgres
     image: postgres:latest
     volumes:
@@ -33,7 +33,7 @@ services:
      - /opt/gitlab/logs:/var/log/gitlab
      - /opt/gitlab/data:/var/opt/gitlab
    depends_on: 
-     - postgres
+     - postgre
 
   gitlab-runner:
    container_name: gitlab-runner
@@ -46,7 +46,7 @@ services:
    environment:
      - CI_SERVER_URL=https://127.0.0.1/ci
    depends_on: 
-     - postgres     
+     - postgre     
 
 networks:
   gitdb: {}
