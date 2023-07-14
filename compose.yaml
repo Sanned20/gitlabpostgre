@@ -2,6 +2,8 @@ services:
   postgresql:
     container_name: postgres
     image: postgres:latest
+    volumes:
+      - opt/postgres/data: /var/lib/postgresql/data
     restart: always
     networks:
       - gitdb 
@@ -9,8 +11,7 @@ services:
     environment:
        POSTGRES_PASSWORD: 12345
        PGDATA: /var/lib/postresql/data/pgdata
-    volumes:
-      - opt/postgres/data: /var/lib/postgresql/data
+    
 
   gitlab:
    container_name: gitlab
