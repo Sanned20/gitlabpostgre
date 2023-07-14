@@ -15,44 +15,34 @@ services:
     
 
   gitlab:
-   container_name: gitlab
    image: gitlab/gitlab-ce:latest
    hostname: 127.0.0.1
    restart: unless-stopped
    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-       gitlab_rails['gitlab_shell_ssh_port'] = 22
-       external_url 'https://127.0.0.1:443'
-       
+    GITLAB_OMNIBUS_CONFIG: |
+      gitlab_rails['gitlab_shell_ssh_port'] = 50022
+      external_url 'htttps://127.0.0.1:443'
    ports:
-     - '80:80'
-     - '443:443'
-     - '22:22'
-   networks:
-     - gitlab_net
-     - gitdb 
+    - "443:443"
+    - "80:80"
+    - "50022:22"
    volumes:
-     - /opt/gitlab/config:/etc/gitlab
-     - /opt/gitlab/logs:/var/log/gitlab
-     - /opt/gitlab/data:/var/opt/gitlab
-   depends_on: 
-     - postgre
+    - /data/docker/gitlab/etc/gitlab:/etc/gitlab
+    - /data/docker/gitlab/var/opt/gitlab:/var/opt/gitlab
+    - /data/docker/gitlab/var/log/gitlab:/var/log/gitlab
+   networks:
+    - gitlab_net
 
   gitlab-runner:
-   container_name: gitlab-runner
-   image: gitlab/gitlab-runner:latest
-   restart: always
-   volumes:
-     - /opt/gitlab-runner/data:/home/gitlab_ci_multi_runner/data
-     - /opt/gitlab-runner/config:/etc/gitlab-runner
-     - /var/run/docker.sock:/var/run/docker.sock:rw
-   environment:
-     - CI_SERVER_URL=https://127.0.0.1/ci
-   networks:
-     - gitlab_net
-   depends_on: 
-     - gitlab     
-
+    image: gitlab/gitlab-runner:alpine
+    restart: unless-stopped
+    depends_on:
+      - gitlab
+    volumes:
+      - /data/docker/gitlab/etc/gitlab-runner:/etc/gitlab-runner
+      - /data/docker/gitlab/var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - gitlab_net
 networks:
   gitlab_net:
   gitdb: {}
