@@ -27,6 +27,7 @@ services:
    ports:
     - "443:443"
     - "80:80"
+    - "22:22"
     
    volumes:
     - $GITLAB_HOME/config:/etc/gitlab
@@ -38,6 +39,7 @@ services:
   gitlab-runner:
     image: gitlab/gitlab-runner:latest
     restart: unless-stopped
+    container_name: gitlab-runner
     depends_on:
       - gitlab
     volumes:
