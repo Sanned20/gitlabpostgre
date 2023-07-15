@@ -1,3 +1,3 @@
 #! /bin/bash
 password="ubuntu"
-sudo apt update -p $password
+sudo apt update
